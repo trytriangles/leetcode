@@ -5,13 +5,10 @@ public:
         int right = numbers.size() - 1;
         while (left < right) {
             int summed = numbers[left] + numbers[right];
-            if (summed == target) {
-                return vector<int>{ left + 1, right + 1};
-            }
-            else if (summed < target) {
+            if (summed == target) return vector<int>{ left + 1, right + 1};
+            if (summed < target) {
                 ++left;
-            }
-            else if (summed > target) {
+            } else if (summed > target) {
                 --right;
             }
         }
