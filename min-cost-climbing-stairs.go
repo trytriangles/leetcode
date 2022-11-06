@@ -17,7 +17,5 @@ func minCostClimbingStairs(cost []int) int {
 		z, y = min(a, b), z
 	}
 	top := len(cost)
-	a := cost[top-1] + z
-	b := cost[top-2] + y
-	return min(a, b)
+	return min(cost[top-1]+z, cost[top-2]+y)
 }
