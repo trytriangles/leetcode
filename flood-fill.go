@@ -47,3 +47,42 @@ func floodFill(image [][]int, sr int, sc int, color int) [][]int {
 	return image
 }
 
+func Test_floodFill(t *testing.T) {
+	cases := []testCase{
+		{
+			Input: Input{
+				Image: [][]int{{0, 0, 0}, {0, 0, 0}},
+				Sr:    0,
+				Sc:    0,
+				Color: 0,
+			},
+			Expected: [][]int{{0, 0, 0}, {0, 0, 0}},
+		},
+		{
+			Input: Input{Image: [][]int{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}},
+				Sr:    1,
+				Sc:    1,
+				Color: 2,
+			},
+			Expected: [][]int{{2, 2, 2}, {2, 2, 0}, {2, 0, 1}},
+		},
+	}
+
+	for index, testCase := range cases {
+		result := floodFill(testCase.Input.Image, testCase.Input.Sr, testCase.Input.Sc, testCase.Input.Color)
+		if len(result) != len(testCase.Expected) {
+			t.Fatal("row count mismatch")
+
+		}
+		for i := 0; i < len(result); i++ {
+			if len(result[i]) != len(testCase.Expected[i]) {
+				t.Fatalf("length mismatch on row %v", i)
+			}
+			for j := 0; j < len(result[i]); j++ {
+				if result[i][j] != testCase.Expected[i][j] {
+					t.Fatalf("testcase %v: result[%v][%v]=%v, expected %v", index, i, j, result[i][j], testCase.Expected[i][j])
+				}
+			}
+		}
+	}
+}
